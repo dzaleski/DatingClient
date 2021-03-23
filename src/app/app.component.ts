@@ -1,10 +1,29 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'DatingAppClient';
+export class AppComponent implements OnInit {
+  private URL: string = 'https://localhost:5001/api/';
+  users: any = [];
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.getUsers();
+  }
+
+  getUsers() {
+    this.http.get(this.URL + 'user').subscribe(
+      (response) => {
+        this.users = response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }
