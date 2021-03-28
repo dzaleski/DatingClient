@@ -1,0 +1,18 @@
+<div *ngIf="!registerMode" class="container">
+    <div class="has-text-centered">
+        <h1 class="title is-1 is-capitalized">Find your match</h1>
+        <h2 class="subtitle is-4">Only what you have to do is sign up and look for you antoher half! Good luck!</h2>
+    </div>
+    <div class="buttons is-centered mt-6">
+        <button (click)="registerToggle()" class="button is-primary is-large">Sign Up!</button>
+        <button class="button is-warning is-large">Learn More!</button>
+    </div>
+</div>
+
+<div *ngIf="registerMode" class="columns is-centered">
+    <div class="column is-one-quarter">
+        <div class="container is-4">
+            <register (cancel)="registerCancelled($event)"></register>
+        </div>
+    </div>
+</div>

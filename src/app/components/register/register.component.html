@@ -1,0 +1,44 @@
+<form #f="ngForm" (submit)="register()">
+    <h1 class="has-text-primary is-divider has-text-centered title is-2">Sign up</h1>
+    <hr>
+    <div class="field">
+        <label class="label">Username</label>
+        <div class="control has-icons-left has-icons-right">
+            <input #username="ngModel" required [(ngModel)]="model.username" [ngClass]="{'is-danger': username.touched && username.invalid, 'is-success': pass.touched && pass.valid}" name="username" class="input" type="text">
+
+            <span class="icon is-small is-left">
+        <i class="fa fa-user"></i>
+      </span>
+            <span class="icon is-small is-right">
+        <i *ngIf="username.touched && username.valid" class="fa fa-check"></i>
+        <i *ngIf="username.touched && username.invalid" class="fa fa-times"></i>
+      </span>
+        </div>
+        <p *ngIf="username.touched && username.invalid" class="help is-danger">Username is required
+        </p>
+    </div>
+
+    <div class="field">
+        <label class="label">Password</label>
+        <div class="control has-icons-left has-icons-right">
+            <input #pass="ngModel" required [(ngModel)]="model.password" name="password" class="input" [ngClass]="{'is-danger': pass.touched && pass.invalid, 'is-success': pass.touched && pass.valid}" type="password">
+
+            <span class="icon is-small is-left">
+        <i class="fa fa-lock"></i>
+      </span>
+            <span class="icon is-small is-right">
+        <i *ngIf="pass.touched && pass.valid" class="fa fa-check"></i>
+        <i *ngIf="pass.touched && pass.invalid" class="fa fa-times"></i>
+      </span>
+        </div>
+        <p *ngIf="pass.touched && pass.invalid" class="help is-danger">Password is required</p>
+    </div>
+    <div class="field is-grouped">
+        <div class="control">
+            <button [disabled]="f.invalid" type="submit" class="button is-link">Register</button>
+        </div>
+        <div class="control">
+            <button (click)="cancelled()" class="button is-link is-light">Cancel</button>
+        </div>
+    </div>
+</form>

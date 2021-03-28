@@ -1,0 +1,40 @@
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a *ngIf="" class="navbar-item">Home</a>
+                <a *ngIf="accountService.currentUserSource$ | async" class="navbar-item">Lists</a>
+                <a *ngIf="accountService.currentUserSource$ | async" class="navbar-item">Matches</a>
+            </div>
+            <div class="navbar-end">
+                <form *ngIf="!(accountService.currentUserSource$ | async)" (submit)="login()" autocomplete="off">
+                    <div class="navbar-item">
+                        <input [(ngModel)]="model.username" name="username" type="text" class="input">
+                        <input [(ngModel)]="model.password" name="password" type="password" class="input ml-1">
+                        <div class="buttons">
+                            <button type="submit" class="button is-primary ml-3">Login</button>
+                        </div>
+                    </div>
+                </form>
+                <div *ngIf="accountService.currentUserSource$ | async" class="navbar-item">
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">Welcome user</a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item">Edit profile</a>
+                            <a class="navbar-item">Contacts</a>
+                            <hr class="navbar-divider">
+                            <a (click)="logout()" class="navbar-item">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
