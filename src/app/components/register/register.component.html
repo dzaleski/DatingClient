@@ -4,7 +4,7 @@
     <div class="field">
         <label class="label">Username</label>
         <div class="control has-icons-left has-icons-right">
-            <input #username="ngModel" required [(ngModel)]="model.username" [ngClass]="{'is-danger': username.touched && username.invalid, 'is-success': pass.touched && pass.valid}" name="username" class="input" type="text">
+            <input #username="ngModel" required [(ngModel)]="model.username" [ngClass]="{'is-danger': username.touched && username.invalid, 'is-success': username.touched && username.valid}" name="username" class="input" type="text">
 
             <span class="icon is-small is-left">
         <i class="fa fa-user"></i>

@@ -1,17 +1,15 @@
 <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
+            <a class="navbar-item" routerLink='/' [routerLinkActiveOptions]="{exact: true}" routerLinkActive='is-active'>Home</a>
         </div>
-        <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-menu">
             <div class="navbar-start">
-                <a *ngIf="" class="navbar-item">Home</a>
-                <a *ngIf="accountService.currentUserSource$ | async" class="navbar-item">Lists</a>
-                <a *ngIf="accountService.currentUserSource$ | async" class="navbar-item">Matches</a>
+                <ng-container *ngIf="accountService.currentUserSource$ | async">
+                    <a class="navbar-item" routerLink='/lists' routerLinkActive='is-active'>Lists</a>
+                    <a class="navbar-item" routerLink='/members' routerLinkActive='is-active'>Matches</a>
+                    <a class="navbar-item" routerLink='/messages' routerLinkActive='is-active'>Messages</a>
+                </ng-container>
             </div>
             <div class="navbar-end">
                 <form *ngIf="!(accountService.currentUserSource$ | async)" (submit)="login()" autocomplete="off">
@@ -19,13 +17,14 @@
                         <input [(ngModel)]="model.username" name="username" type="text" class="input">
                         <input [(ngModel)]="model.password" name="password" type="password" class="input ml-1">
                         <div class="buttons">
-                            <button type="submit" class="button is-primary ml-3">Login</button>
+                            <button type="submit" class="button is-primary is-outlined ml-3">Login</button>
                         </div>
                     </div>
                 </form>
-                <div *ngIf="accountService.currentUserSource$ | async" class="navbar-item">
+
+                <div *ngIf="(accountService.currentUserSource$ | async) as user" class="navbar-item">
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">Welcome user</a>
+                        <a class="navbar-link">Welcome {{user.username | titlecase}}</a>
                         <div class="navbar-dropdown">
                             <a class="navbar-item">Edit profile</a>
                             <a class="navbar-item">Contacts</a>
